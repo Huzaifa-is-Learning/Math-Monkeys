@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Monkeys</title>
+<!-- Standard favicon -->
+<link rel="icon" href="Favicon 32x32.ico" type="image/x-icon">
+
+<!-- PNG favicon for modern browsers -->
+<link rel="icon" href="Favicon 64x64.png" sizes="32x32" type="image/png">
+<link rel="icon" href="Favicon 16x16.png" sizes="16x16" type="image/png">
+
+<!-- Android Chrome icon -->
+<link rel="icon" href="Favicon 192x192.png" sizes="192x192" type="image/png">
+<link rel="icon" href="Favicon 512x512.png" sizes="512x512" type="image/png">
+
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="left-panel">
+        <!-- Title + Logo -->
+        <div class="title-container">
+            <img src="Math Monkeys Logo.png" alt="Math Monkeys Logo" class="logo">
+            <h1>Math Monkeys</h1>
+        </div>
+        <h2 class="subtitle">by Huzaifa Zaman</h2>
+
+        <!-- Score + Question -->
+        <div class="scoreboard">Score: <span id="score">0</span></div>
+        <div class="question" id="question">Question will appear here</div>
+
+        <!-- Answer Section -->
+        <div class="answer-section">
+            <input type="number" id="answer" placeholder="Enter your answer" />
+            <div class="button-row">
+                <button id="submit">Submit</button>
+                <button id="skip">Skip</button>
+                <button id="exit">Exit</button>
+            </div>
+        </div>
+
+        <!-- Feedback + Final Summary -->
+        <div class="feedback" id="feedback"></div>
+        <div class="final-summary" id="finalSummary"></div>
+    </div>
+
+    <!-- Horizontal divider for small screens -->
+    <hr class="responsive-divider" />
+
+    <!-- Question History -->
+    <div class="right-panel">
+        <h3>Question History</h3>
+        <ul class="history-list" id="historyList"></ul>
+    </div>
+</div> 
+
+<script src="Quizzer.js" defer></script>
+</body>
+</html>
