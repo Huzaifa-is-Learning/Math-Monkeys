@@ -10,6 +10,29 @@ body {
     min-height: 100vh;
 }
 
+/* Styles for the container of both 'by' and the link */
+.author-prefix {
+    text-align: center;
+    color: #ffe;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Styles to make the link look like an h2 subtitle */
+.author-link {
+    font-size: 1.3em; 
+    font-weight: bold; 
+    color: white; 
+    text-decoration: none; 
+    margin: 5px;
+}
+
+/* Hover effect */
+.author-link:hover {
+    color: #ffb400; 
+    text-decoration: underline; 
+}
+
 /* Quiz container */
 .quiz-container {
     display: flex;
