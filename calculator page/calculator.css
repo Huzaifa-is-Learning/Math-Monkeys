@@ -1,0 +1,27 @@
+body {
+    font-family: "Segoe UI', sans-serif;";
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    margin: 0;
+    padding: 0;
+}
+
+.header-content{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+
+}
+h1 {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
