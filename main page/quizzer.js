@@ -3,9 +3,29 @@
 // Wait until DOM is fully loaded
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Generate random integer between 1 and max
+    // Check for saved difficulty, default to 'easy' if not found
+    let difficulty = localStorage.getItem('difficulty') || 'easy';
+
+    // Helpers
     function randomInt(max) {
         return Math.floor(Math.random() * max) + 1;
+    }
+
+    function digitLength(num) {
+        return Math.floor(Math.log10(Math.abs(num))) + 1;
+    }
+
+    // Adjust operands for Hard mode (ratio system)
+    function adjustOperands(a, b) {
+        const lenA = digitLength(a);
+        const lenB = digitLength(b);
+
+        if (lenA >= 4 && lenB >= 4) {
+            b = randomInt(90) + 10; // force b into 2 digits
+        } else if (lenA === 3 && lenB === 3) {
+            b = randomInt(9); // make b 1 digit
+        }
+        return [a, b];
     }
 
     // Quiz stats
@@ -31,42 +51,105 @@ window.addEventListener('DOMContentLoaded', () => {
     const skipSound = new Audio('/assets/skip.mp3');
     const exitSound = new Audio('/assets/exit.wav');
 
-    // Generate a new math question
+    // -------------------------------
+    // Question generator
+    // -------------------------------
     function generateQuestion() {
-        const op = randomInt(4);
-        let a = randomInt(10);
-        let b = randomInt(10);
+        if (difficulty === "easy") {
+            // Basic + - × ÷, safe rules
+            const op = randomInt(4);
+            let a = randomInt(10);
+            let b = randomInt(10);
 
-        // Ensure no negative subtraction
-        if (op === 2 && a < b) [a, b] = [b, a];
+            if (op === 2 && a < b) [a, b] = [b, a]; // no negatives
+            if (op === 4) a = a * b; // clean division
 
-        // Ensure clean division
-        if (op === 4) {
-            a = a * b; // makes a divisible by b
+            switch (op) {
+                case 1: return { questionText: `${a} + ${b}`, answer: a + b };
+                case 2: return { questionText: `${a} - ${b}`, answer: a - b };
+                case 3: return { questionText: `${a} × ${b}`, answer: a * b };
+                case 4: return { questionText: `${a} ÷ ${b}`, answer: a / b };
+            }
         }
 
-        let questionText, answer;
-        switch(op) {
-            case 1: questionText = `${a} + ${b}`; answer = a + b; break;
-            case 2: questionText = `${a} - ${b}`; answer = a - b; break;
-            case 3: questionText = `${a} × ${b}`; answer = a * b; break;
-            case 4: questionText = `${a} ÷ ${b}`; answer = a / b; break;
+        if (difficulty === "medium") {
+            // BODMAS, up to 3 digits, negatives + decimals allowed
+            let a = randomInt(999);
+            let b = randomInt(999);
+            const op = ["+", "-", "×", "÷"][randomInt(4) - 1];
+
+            let expression = `${a} ${op} ${b}`;
+            let answer;
+
+            // Use eval safely with replacements
+            expression = expression.replace(/×/g, "*").replace(/÷/g, "/");
+            answer = eval(expression);
+
+            // Handle recurring decimals: allow 2–3 significant figures
+            let roundedAns = parseFloat(answer.toPrecision(3));
+
+            return {
+                questionText: `Solve: ${a} ${op} ${b}`,
+                answer: roundedAns
+            };
         }
 
-        return { questionText, answer };
+        if (difficulty === "hard") {
+            // Hard: multi-expression, brackets, percentages, large numbers
+            const type = randomInt(2); // 1 = arithmetic, 2 = percentage
+
+            if (type === 2) {
+                // Percentage style
+                let part = randomInt(9999) + 1;
+                let whole = randomInt(99999) + 100;
+                let percent = (part / whole) * 100;
+
+                return {
+                    questionText: `The percentage of ${part} bananas out of ${whole}`,
+                    answer: parseFloat(percent.toFixed(2))
+                };
+            } else {
+                // Arithmetic with up to 3–4 expressions
+                let ops = ["+", "-", "×", "÷"];
+                let exprParts = [];
+                let terms = randomInt(3) + 1; // 2–4 terms
+
+                for (let i = 0; i < terms; i++) {
+                    let a = randomInt(99999); // up to 5 digits
+                    let b = randomInt(9999);  // up to 4 digits
+                    [a, b] = adjustOperands(a, b);
+
+                    let op = ops[randomInt(4) - 1];
+                    let piece = `(${a} ${op} ${b})`;
+                    exprParts.push(piece);
+                }
+
+                let expression = exprParts.join(" ");
+                let evalExpr = expression.replace(/×/g, "*").replace(/÷/g, "/");
+                let answer = eval(evalExpr);
+
+                return {
+                    questionText: `Solve: ${expression}`,
+                    answer: parseFloat(answer.toFixed(2))
+                };
+            }
+        }
     }
 
-    // Update score display
+    // -------------------------------
+    // UI + Quiz Flow
+    // -------------------------------
     function updateScore() {
         scoreEl.textContent = correctAnswers;
     }
 
-    // Update question history
     function updateHistory(question, userAnswer, status) {
         const li = document.createElement('li');
 
-        if (status === "skipped" || status === "wrong") {
-            li.textContent = `${question} | Correct answer: ${currentQ.answer}`;
+        if (status === "skipped") {
+            li.textContent = `${question} | Correct answer: ${currentQ.answer} | You skipped`;
+        } else if (status === "wrong") {
+            li.textContent = `${question} | Correct answer: ${currentQ.answer} | Your answer: ${userAnswer}`;
         } else {
             li.textContent = `${question} | Your answer: ${userAnswer}`;
         }
@@ -75,30 +158,26 @@ window.addEventListener('DOMContentLoaded', () => {
         historyListEl.prepend(li);
     }
 
-    // Update final summary
     function updateFinalSummary() {
-        if (totalQuestions > 0){
+        if (totalQuestions > 0) {
             const percent = Math.round((correctAnswers / totalQuestions) * 100);
-            finalSummaryEl.textContent = `${correctAnswers} out of ${totalQuestions} questions correct (${percent}%). Thanks for playing!`;
+            finalSummaryEl.textContent =
+                `${correctAnswers} out of ${totalQuestions} questions correct (${percent}%). Thanks for playing!`;
         }
     }
 
-    // Load next question
     function nextQuestion() {
-    currentQ = generateQuestion();
-    questionEl.textContent = `Solve: ${currentQ.questionText}`;
-    answerEl.value = '';
+        currentQ = generateQuestion();
+        questionEl.textContent = currentQ.questionText;
+        answerEl.value = '';
 
-    // Clear previous feedback after 2.5 seconds
-    setTimeout(() => {
-        feedbackEl.textContent = '';
-    }, 2500);
-}
+        setTimeout(() => {
+            feedbackEl.textContent = '';
+        }, 2500);
+    }
 
-
-    // Handle answer submission
     function submitAnswer() {
-        if(answerEl.value === '') {
+        if (answerEl.value === '') {
             feedbackEl.textContent = "Please enter a number!";
             feedbackEl.style.color = "#ffcccc";
             return;
@@ -107,7 +186,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const userAnswer = Number(answerEl.value);
         let status;
 
-        if(userAnswer === currentQ.answer){
+        if (Math.abs(userAnswer - currentQ.answer) < 0.01) {
+            // accept close decimals
             status = "correct";
             correctAnswers++;
             feedbackEl.textContent = "Correct! ✅";
@@ -124,13 +204,11 @@ window.addEventListener('DOMContentLoaded', () => {
         updateScore();
         updateHistory(currentQ.questionText, userAnswer, status);
 
-        // Delay next question so feedback is visible
         setTimeout(() => {
             nextQuestion();
         }, 1000);
     }
 
-    // Handle skipping a question
     function skipQuestion() {
         totalQuestions++;
         updateHistory(currentQ.questionText, "-", "skipped");
@@ -143,7 +221,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Exit quiz
     function exitQuiz() {
         exitSound.play();
         answerEl.disabled = true;
@@ -161,5 +238,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Start first question
     nextQuestion();
-
 });
