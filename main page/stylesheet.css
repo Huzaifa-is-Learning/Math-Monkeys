@@ -197,17 +197,9 @@ button:hover {
 }
 
 .logo {
-    width: 72px;
+    width: 85px;
     height: auto;
     margin-right: 10px;
-}
-
-@media (min-width: 768px) {
-    .logo {
-        width: 60px;
-        height: auto;
-        margin-right: 1px;
-    }
 }
 
 .difficulty-btn {
@@ -228,6 +220,12 @@ button:hover {
 .difficulty-btn:hover {
     background-color: #fdd835;
     transform: scale(1.05);
+}
+
+@media (max-width: 799px) {
+  .difficulty-btn:hover {
+    transform: none; /* This cancels the scale effect */
+  }
 }
 
 /* Answer section */
@@ -264,4 +262,14 @@ button:hover {
     cursor: pointer;
     transition: 0.2s;
     z-index: 1000; /* makes sure it’s above quiz box */
+}
+
+.calculator-icon:hover {
+    transform: scale(1.05);;
+}
+
+@media (max-width: 799px) {
+  .calculator-icon:hover {
+    transform: none; /* This cancels the scale effect */
+  }
 }
