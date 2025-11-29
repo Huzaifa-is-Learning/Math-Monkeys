@@ -1,0 +1,275 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Styles for the container of both 'by' and the link */
+.author-prefix {
+    text-align: center;
+    color: #ffe;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Styles to make the link look like an h2 subtitle */
+.author-link {
+    font-size: 1.3em; 
+    font-weight: bold; 
+    color: white; 
+    text-decoration: none; 
+    margin: 5px;
+}
+
+/* Hover effect */
+.author-link:hover {
+    color: #ffb400; 
+    text-decoration: underline; 
+}
+
+/* Quiz container */
+.quiz-container {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 900px;
+    width: 95%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Panels */
+.left-panel, .right-panel {
+    flex: 1 1 300px;
+    padding: 20px;
+}
+
+/* Vertical line on desktop */
+.left-panel {
+    border-right: 2px solid rgba(255,255,255,0.3);
+}
+
+/* Horizontal divider for small screens (hidden by default) */
+.responsive-divider {
+    display: none;
+    border: none;
+    border-top: 2px solid rgba(255,255,255,0.3);
+    margin: 20px 0;
+}
+
+/* Responsive: stack panels vertically under 800px */
+@media screen and (max-width: 800px) {
+    .quiz-container {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        border-right: none; /* remove vertical line */
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .responsive-divider {
+        display: block; /* show horizontal divider */
+    }
+
+    .right-panel {
+        padding-top: 20px;
+    }
+
+    /* Make buttons full width on small screens */
+    .button-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button-row button {
+        width: 100%;
+    }
+
+    input[type="number"], .answer-section input {
+        width: 90%;
+    }
+}
+
+/* Titles */
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+/* Question */
+.question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Input */
+input[type="number"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 60%;
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    background-color: #ffb400;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ffa500;
+    transform: scale(1.05);
+}
+
+.feedback {
+    margin-top: 10px;
+    font-weight: bold;
+    min-height: 24px;      /* keeps layout stable */
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;           /* default text color */
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* optional for readability */
+}
+
+/* Score */
+.scoreboard {
+    margin-top: 20px;
+    font-size: 1.3em;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Right panel */
+.right-panel h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.history-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-left: 0;
+    list-style: none;
+}
+
+.history-list li.correct { color: #00ff88; }
+.history-list li.wrong { color: #ff4c4c; }
+.history-list li.skipped { color: #ffd700; }
+
+/* Final summary */
+.final-summary {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Title container */
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+}
+
+.title-container h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.logo {
+    width: 85px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.difficulty-btn {
+    position: fixed;   /* stays pinned no matter scroll */
+    top: 15px;
+    left: 15px;
+    padding: 8px 16px;
+    background-color: #ffeb3b;
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 1000; /* makes sure it’s above quiz box */
+}
+
+.difficulty-btn:hover {
+    background-color: #fdd835;
+    transform: scale(1.05);
+}
+
+@media (max-width: 799px) {
+  .difficulty-btn:hover {
+    transform: none; /* This cancels the scale effect */
+  }
+}
+
+/* Answer section */
+.answer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.answer-section input {
+    width: 70%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-row button {
+    width: 100px;
+}
+
+.calculator-icon {
+    position: fixed;   /* stays pinned no matter scroll */
+    top: -5px;
+    right: -10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 1000; /* makes sure it’s above quiz box */
+}
+
+.calculator-icon:hover {
+    transform: scale(1.05);;
+}
+
+@media (max-width: 799px) {
+  .calculator-icon:hover {
+    transform: none; /* This cancels the scale effect */
+  }
+}

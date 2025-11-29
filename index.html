@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="H4Qez1EtaXtdPa1IfSkDCRpOHTOx4_xn66m2Wjd0U28" />
+<title>Math Monkeys | Math Learning Made Easier!</title>
+<!-- For Search Engines -->
+<meta name="description" content="Math Monkeys is a fun and interactive math quiz website. It is a game which has scores, history and Be aware, this is addictive. Test your math skills with various difficulty levels and track your progress!">
+<meta name="keywords" content="Math Monkeys, Math Quiz, Fun Math, Interactive Learning, Math Games, Educational Quizzes, Math Challenges, Online Math Tests, Math Practice, Learning Math, Math Skills, Math Exercises, Math for kids, Math learning for kids, Math practice for Mental Math ">
+<meta name="author" content="Huzaifa Zaman">
+
+<!-- Standard favicon -->
+<link rel="icon" href="/assets/Math Monkeys Logo Dark.ico" type="image/x-icon">
+
+<!-- PNG favicon for modern browsers -->
+<link rel="icon" href="/assets/Favicon_64x64.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/Favicon_16x16.png" sizes="16x16" type="image/png">
+
+<!-- Android Chrome icon -->
+<link rel="icon" href="/assets/Favicon_192x192.png" sizes="192x192" type="image/png">
+<link rel="icon" href="/assets/Favicon_512x512.png" sizes="512x512" type="image/png">
+
+<!-- iOS Safari icon -->
+<link rel="apple-touch-icon" href="/assets/Favicon_192x192.png">
+
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<header>
+    <nav>
+    <!-- Difficulty Button -->
+    <a href="/difficulty-page/difficulty.html">
+    <button class="difficulty-btn">Change Difficulty</button>
+    </a>
+    <!-- Calculator Button -->
+     <a href="/calculator-page/calculator.html" target="_blank" class="calculator-icon">
+        <img src="/assets/calc_64x64.png" alt="Calculator Icon">
+     </a>
+    </nav>
+</header>
+    
+
+<div class="quiz-container">
+    <div class="left-panel">
+        <!-- Title + Logo -->
+        <div class="title-container">
+            <img src="/assets/Math Monkeys Logo Dark.png" alt="Math Monkeys Logo" class="logo">
+            <h1>Math Monkeys</h1>
+        </div>
+        <!-- Author -->   
+        
+        <p class="author-prefix">by <a href="/about-me/me.html" class="author-link">Huzaifa Zaman</a></p>
+        
+        <!-- Score + Question -->
+        <div class="scoreboard">Score: <span id="score">0</span></div>
+        <div class="question" id="question">Question will appear here</div>
+
+        <!-- Answer Section -->
+        <div class="answer-section">
+            <input type="number" id="answer" placeholder="Enter your answer" />
+            <div class="button-row">
+                <button id="submit">Submit</button>
+                <button id="skip">Skip</button>
+                <button id="exit">Exit</button>
+            </div>
+        </div>
+
+        <!-- Feedback + Final Summary -->
+        <div class="feedback" id="feedback"></div>
+        <div class="final-summary" id="finalSummary"></div>
+    </div>
+
+    <!-- Horizontal divider for small screens -->
+    <hr class="responsive-divider" />
+
+    <!-- Question History -->
+    <div class="right-panel">
+        <h3>Question History</h3>
+        <ul class="history-list" id="historyList"></ul>
+    </div>
+</div> 
+
+<script src="quizzer.js" defer></script>
+</body>
+</html>

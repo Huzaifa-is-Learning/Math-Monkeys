@@ -1,0 +1,224 @@
+/* General Page */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #36d1dc, #5b86e5);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* vertical flow */
+}
+
+/* Title Container */
+.title-container {
+  text-align: center;
+  margin: 40px 0 20px 0;
+}
+
+.title-container h1 {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+/*Introduction*/
+.intro {
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.intro h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: #ffeb3b;
+}
+
+.name-monkey {
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.name-monkey h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: #ffeb3b;
+}
+
+.timeline-item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+  padding: 30px 35px;           
+  margin: 50px 0;               /* more spacing between items */
+  background: rgba(255, 255, 255, 0.15);  /* slightly brighter for better contrast */
+  border-radius: 16px;          
+  font-size: 1.3rem;            /* slightly bigger text */
+  line-height: 1.8;             
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle depth */
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item strong {
+  color: #ffeb3b; /* golden/yellow for contrast */
+}
+
+/* Date inside timeline */
+.timeline .date {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #ffeb3b;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.timeline .timeline-title {
+  text-align: center;
+  font-size: 2.2rem;        
+  font-weight: 700;         
+  color: #ffe082;           /* golden/yellow for contrast */
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3); /* subtle glow for depth */
+  letter-spacing: 1px;      /* slight spacing for elegance */
+}
+
+.timeline-item:hover {
+  background: rgba(255,255,255,0.25); 
+  transform: translateY(-8px);         /* lift effect */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* stronger shadow on hover */
+}
+
+/* Footer */
+footer {
+  margin-top: auto; /* stick footer at bottom */
+  background-color: #232f3e;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.back-to-top {
+  background-color: #37475a;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.back-to-top a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-to-top a:hover {
+  text-decoration: underline;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+}
+
+.footer-column {
+  margin: 10px 20px;
+  text-align: center;
+}
+
+.footer-column h2 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.footer-column h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+  color: #dddddd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.quiz-button a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #ffeb3b;
+  color: #333;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.quiz-button a:hover {
+  background: #fbc02d;
+}
+
+/* Profile Picture */
+.profile-pic {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic img {
+  width: 200px;               /* make it bigger */
+  height: 200px;              
+  border-radius: 50%;
+  border: 5px solid #fff;     /* slightly thicker border to pop */
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Optional: subtle hover effect */
+  cursor: pointer;
+}
+
+.profile-pic img:hover {
+  transform: scale(1.05);     /* slightly enlarge on hover */
+  box-shadow: 0 12px 25px rgba(0,0,0,0.45); /* stronger shadow on hover */
+}
+
+/*MOBILE OPTIMIZATION: Reduce H1 size for small screens (≤ 600px) */
+/* ------------------------------------------------------------- */
+@media screen and (max-width: 600px) {
+    /* Reduce the H1 size so it doesn't overwhelm the mobile screen */
+    .title-container h1 {
+        font-size: 1.6rem; /* Significantly smaller and better fitting */
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Optional: Slightly reduce image size on mobile */
+    .profile-pic img {
+        width: 150px; 
+        height: 150px;
+    }
+
+    /* Optional: Tidy up footer on mobile */
+    .footer-main {
+        padding: 20px 10px;
+    }
+}

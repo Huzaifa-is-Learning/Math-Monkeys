@@ -1,0 +1,111 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzaifa Zaman, Creator of Math Monkeys</title>
+    <meta name="google-site-verification" content="google1c27a06200329668.html">
+    <!-- For Search Engines -->
+    <meta name="description" content="Learn more about Huzaifa Zaman, the creator of Math Monkeys. Discover his journey, inspirations.">
+    <meta name="keywords" content="Huzaifa Zaman, Math Monkeys Creator, About Huzaifa, Math Monkeys Author, Coding Journey, Web Developer, Student Developer">
+    <meta name="author" content="Huzaifa Zaman">
+
+    <!-- Standard favicon -->
+    <link rel="icon" href="/assets/Favicon_32x32.ico" type="image/x-icon">
+    <!-- PNG favicon for modern browsers -->
+    <link rel="icon" href="/assets/Favicon_64x64.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/assets/Favicon_16x16.png" sizes="16x16" type="image/png">
+    <!-- Android Chrome icon -->
+    <link rel="icon" href="/assets/Favicon_192x192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="/assets/Favicon_512x512.png" sizes="512x512" type="image/png">
+    
+    <link rel="stylesheet" href="me.css">
+ </head>
+ <body>
+   <!-- Title + Subtitle -->
+   <span class="title-container">
+   <h1>Meet Huzaifa Zaman, Creator of Math Monkeys</h1>
+    <div class="profile-pic">
+      <img src="Huzaifa.png" alt="Picture of Huzaifa Zaman">
+    </div>
+  </span>
+
+    <!-- Introduction Section -->
+<section class="intro">
+  <h2>Hello, I’m Huzaifa Zaman👋</h2>
+  <p>
+    I am a student of Oxford International School. I started my coding journey with curiosity and passion, 
+    and over time I’ve built projects like Math Monkeys 🚀. 
+    I love solving problems, learning new tech, and sharing knowledge. 
+    Outside coding, I enjoy cooking, gaming, and exploring new ideas.
+  </p>
+</section>
+
+<section class="name-monkey">
+  <h2>Why the Name "Math Monkeys"? 🐒</h2>
+  <p>
+    The name "<strong>Math Monkeys</strong>" reflects my playful approach to learning and problem-solving, Also that I believe Monkeys are the most uncertain. Once when I visited a zoo, I saw monkeys jumping across, I thought they were cute and I offered them a banana while recording with a camera. They took the Banana first adorably but just after a minute of getting a treat, they grasped my camera and threw it on the ground. I was shocked but then I realized that monkeys are <strong>unpredictable</strong> and <strong>curious</strong>, just like the Maths in these Quizzes. So to me, "<strong>Math Monkeys</strong>" symbolizes the fun, curiosity, and unpredictability of learning math through engaging quizzes.
+  </p>
+</section>
+
+    <!-- Timeline Section -->
+<section class="timeline">
+  <h2 class="timeline-title">My Journey</h2>
+  <div class="timeline-item">
+    <span class="date">2022</span>
+    <p>Started learning HTML & CSS</p>
+  </div>
+  <div class="timeline-item">
+    <span class="date">2023</span>
+    <p>Built my first mini projects</p>
+  </div>
+  <div class="timeline-item">
+    <span class="date">2024</span>
+    <p>Learned JavaScript & hosted sites on GitHub Pages</p>
+  </div>
+  <div class="timeline-item">
+    <span class="date">2025</span>
+    <p>Created <strong>Math Monkeys 🐒🚀</strong></p>
+  </div>
+</section>
+
+<footer>
+    <!-- Back to top -->
+    <div class="back-to-top">
+        <a href="#top">Back to Top ↑</a>
+    </div>
+    <!-- Main footer -->
+    <div class="footer-main">
+        <div class="footer-column">
+        <h2>Created by Huzaifa Zaman with ❤️<h2>
+        <h3>Get to Know Me more</h3>
+        <ul>
+          <li><a href="https://github.com/Huzaifa-is-Learning" target="_blank">GitHub</a></li>
+          <li><a href="https://www.facebook.com/share/17EFTmb92J/?mibextid=wwXIfr" target="_blank">Facebook</a></li>
+          <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvnrrSWpRFtwdjxGqRGTMwkHfTsvMdGtXnghXkcTNznwVwSgGtfjlXxLpQxDcnpCdkhwSB" target="_blank">Email me</a></li>
+        </ul>
+        <!-- quiz button -->
+        <p class="quiz-button"><a href="../index.html">Back to the Quiz</a></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.timeline-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Add a delay for stagger effect
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 300); // 300ms delay between items
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(item => observer.observe(item));
+</script>
+
+ </body>
+ </html>

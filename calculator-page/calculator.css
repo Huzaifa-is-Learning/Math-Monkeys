@@ -1,0 +1,224 @@
+/* General Page */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2e2e3f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Header */
+header {
+  width: 100%;
+  padding: 20px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Calculator */
+.calculator {
+  margin-top: 40px;
+  background: #222;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 340px; /* Default size for PC */
+}
+
+/* Display */
+.display {
+  background: #111;
+  color: white;
+  font-size: 2.5rem;
+  text-align: right;
+  padding: 20px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  font-size: 1.4rem;
+  color: white;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.92);
+  filter: brightness(1.2);
+}
+
+.btn.gray { background: #a5a5a5; color: black; }
+.btn.orange { background: #ff9500; }
+.btn.dark { background: #505050; }
+
+.zero {
+  grid-column: span 2;
+  border-radius: 50px;
+  aspect-ratio: auto;
+}
+
+/* Responsive: Mobile version */
+@media (max-width: 768px) {
+  .calculator {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .display {
+    font-size: 2rem;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 1.2rem;
+    padding: 16px;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #232f3e;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.back-to-top {
+    background-color: #37475a;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.back-to-top a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-to-top a:hover {
+    text-decoration: underline;
+}
+
+.footer-main {
+    text-align: center;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+}
+
+.footer-column {
+    text-align: center;
+}
+
+.footer-column h2 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.footer-column h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+    color: #dddddd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.quiz-button a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #ffeb3b;
+    color: #333;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.quiz-button a:hover {
+    background: #fbc02d;
+}
+
+/* Clear/Backspace toggle */
+#clear-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#clear-btn .icon {
+  width: 30px;
+  height: 30px;
+}
+
+.hidden {
+  display: none;
+}
