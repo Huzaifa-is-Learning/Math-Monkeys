@@ -2,12 +2,12 @@
 
 // Wait until DOM is fully loaded
 window.addEventListener('DOMContentLoaded', () => {
-    
+
 function getCurrentDifficulty() {
     return localStorage.getItem('difficulty') || "easy";
 }
 
-let consecutiveFails = 0;  // track wrong answers in a row
+let consecutiveFails = 0;  // track wrong answers in a row
 
 
     // ---------- Helpers ----------
@@ -19,62 +19,47 @@ let consecutiveFails = 0;  // track wrong answers in a row
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // ---------- Restart Quiz ---------- 
-    function restartQuiz() { 
-        consecutiveFails = 0; 
-        location.reload(); 
-         }
+    // ---------- Restart Quiz ---------- 
+    function restartQuiz() { 
+        consecutiveFails = 0; 
+        location.reload(); 
+         }
 
-    // ---------- Game Over ----------
+    // ---------- Game Over (Refactored) ----------
     function triggerGameOver() {
         const quizContainer = document.querySelector('.quiz-container');
 
+        // 1. Clear container and set up the Game Over screen
         quizContainer.innerHTML = '';
+        // Add the class for desktop/mobile centering (defined in CSS)
+        quizContainer.classList.add('game-over-screen'); 
 
-        // Create Game Over banner
-        const gameOverBanner = document.createElement('div');
-        gameOverBanner.style.textAlign = 'center';
-        gameOverBanner.style.padding = '40px';
-        gameOverBanner.style.fontSize = '3rem';
-        gameOverBanner.style.fontWeight = 'bold';
-        gameOverBanner.textContent = 'GAME OVER';
+        // 2. Create Title (uses CSS class for styling)
+        const gameOverTitle = document.createElement('h1');
+        gameOverTitle.textContent = 'GAME OVER';
+        gameOverTitle.classList.add('game-over-title'); 
 
-        const tryAgain = document.createElement('h2');
-        tryAgain.textContent = 'Try Again';
-        tryAgain.style.textAlign = 'center';
-        tryAgain.style.cursor = 'pointer';
-        tryAgain.style.background = "#ff5733";
-        tryAgain.style.color = '#fff';
-        tryAgain.style.borderRadius = "8px";
-        tryAgain.style.padding = "10px 20px";
-        tryAgain.style.transition = "transform 0.2s, background 0.2s";
-        tryAgain.style.display = "block";
-        tryAgain.style.margin = "20px auto"; 
+        // 3. Create Restart Button (uses CSS class for styling)
+        const tryAgainBtn = document.createElement('h2');
+        tryAgainBtn.textContent = 'Try Again';
+        tryAgainBtn.classList.add('restart-button'); 
 
+        // 4. Attach Event Listener (Keep the click handler for the restart logic)
+        tryAgainBtn.addEventListener('click', () => {
+            // Subtle click animation
+            tryAgainBtn.style.transform = "scale(0.95)"; 
+            setTimeout(() => {
+                // Remove the game-over class before reloading to clean up DOM
+                quizContainer.classList.remove('game-over-screen'); 
+                restartQuiz();
+            }, 100);
+        });
 
-        tryAgain.addEventListener('mouseenter', () => {
-        tryAgain.style.transform = "scale(1.1)";
-        tryAgain.style.background = "#ff3300";
-});
-
-        tryAgain.addEventListener('mouseleave', () => {
-        tryAgain.style.transform = "scale(1)";
-        tryAgain.style.background = "#ff5733";
-});
-
-        tryAgain.addEventListener('click', () => {
-        tryAgain.style.transform = "scale(0.95)";
-        setTimeout(() => {
-            tryAgain.style.transform = "scale(1)";
-            restartQuiz();
-        }, 100);
-});
-
-    quizContainer.appendChild(gameOverBanner);
-    quizContainer.appendChild(tryAgain);
-
+        // 5. Append elements
+        quizContainer.appendChild(gameOverTitle);
+        quizContainer.appendChild(tryAgainBtn);
     }
-    
+     
     // ---------- Answer check ----------
     function checkAnswer(userAnswer, correctAnswer) {
 	
@@ -236,10 +221,10 @@ let consecutiveFails = 0;  // track wrong answers in a row
     let currentQ = {};
 
     // Sounds
-    const correctSound = new Audio('../assets/correct.mp3');
-    const wrongSound = new Audio('../assets/error.mp3');
-    const skipSound = new Audio('../assets/skip.mp3');
-    const exitSound = new Audio('../assets/exit.wav');
+    const correctSound = new Audio('assets/correct.mp3');
+    const wrongSound = new Audio('assets/error.mp3');
+    const skipSound = new Audio('assets/skip.mp3');
+    const exitSound = new Audio('assets/exit.wav');
 
     // ---------- Question generation ----------
     // Build a medium single-op expression (applies medium ratio rules)
@@ -578,6 +563,7 @@ let consecutiveFails = 0;  // track wrong answers in a row
     nextQuestion();
 
 });
+
     answerEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') submitAnswer();
     });
@@ -585,5 +571,3 @@ let consecutiveFails = 0;  // track wrong answers in a row
     // Initialize
     updateScore();
     nextQuestion();
-
-

@@ -273,3 +273,65 @@ button:hover {
     transform: none; /* This cancels the scale effect */
   }
 }
+
+/* --- Game Over Screen Container --- */
+.game-over-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* --- Game Over Title (h1) --- */
+.game-over-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+/* --- Restart Button (h2) --- */
+.restart-button {
+    background: #ff5733;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 15px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    /* Smooth interaction effects */
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+}
+
+.restart-button:hover {
+    background: #ff3300; 
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.restart-button:active {
+    transform: scale(0.98);
+}
+/* --- Responsive Adjustments for Desktop Screens --- */
+@media (min-width: 768px) {
+    
+    .game-over-title {
+        font-size: 8rem;
+        margin-bottom: 60px;
+    }
+
+    .restart-button {
+        font-size: 2rem;
+        padding: 20px 60px;
+    }
+}
